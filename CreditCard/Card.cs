@@ -8,39 +8,39 @@ namespace BankProgramm
 {
     internal class Card
     {
-        public string nameCardHolder;
-        public int IdCard;
-        public double balanceCard;
+        public string NameCardHolder { get; set; }
+        public int IdCard { get; set; }
+        public double BalanceCard { get; protected set; }
 
         public Card(string name, int numCard, double balance)
         {
-            nameCardHolder = name;
+            NameCardHolder = name;
             IdCard = numCard;
-            balanceCard = balance;
+            BalanceCard = balance;
         }
 
         public virtual void BalanceDown(double downSumm)
         {
-            if (balanceCard - downSumm <= 0)
+            if (BalanceCard - downSumm <= 0)
             {
                 Console.WriteLine("Out of limit, you can't spend so much!");
             }
             else
             {
-                balanceCard -= downSumm;
+                BalanceCard -= downSumm;
             }
         }
         public void BalanceUp(double upSumm)
         {
-            balanceCard += upSumm;
+            BalanceCard += upSumm;
         }
         public double GetBalance()
         {
-            return balanceCard;
+            return BalanceCard;
         }
         public virtual string GetFullCardInfo()
         {
-            return "\nID Card: " + IdCard + ", Name: " + nameCardHolder + ", Balance: " + GetBalance();
+            return "\nID Card: " + IdCard + ", Name: " + NameCardHolder + ", Balance: " + GetBalance();
         }
     }
 }

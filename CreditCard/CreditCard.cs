@@ -18,13 +18,13 @@ namespace BankProgramm
 
         public override void BalanceDown(double downSumm)
         {
-            if (balanceCard + creditLimit - downSumm <= 0)
+            if (BalanceCard + creditLimit - downSumm <= 0)
             {
                 Console.WriteLine("Out of limit, you can't spend so much!");
             }
             else
             {
-                balanceCard -= downSumm;
+                BalanceCard -= downSumm;
             }
         }
 
