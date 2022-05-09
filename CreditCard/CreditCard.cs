@@ -8,6 +8,7 @@ namespace BankProgramm
 {
     internal class CreditCard : Card
     {
+        //My changes
         public double creditLimit;
         public CreditCard(string name, int numCard, double balance, int raiting) : base(name, numCard, balance)
         {
