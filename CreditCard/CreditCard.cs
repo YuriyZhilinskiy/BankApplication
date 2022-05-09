@@ -8,17 +8,15 @@ namespace BankProgramm
 {
     internal class CreditCard : Card
     {
-        //My changes
-        //
-        public double creditLimit;
+        public double CreditLimit { get; set; }
         public CreditCard(string name, int numCard, double balance, int raiting) : base(name, numCard, balance)
         {
-            creditLimit = balance * raiting * 1.10;
+            CreditLimit = balance * raiting * 1.10;
         }
 
         public override void BalanceDown(double downSumm)
         {
-            if (BalanceCard + creditLimit - downSumm <= 0)
+            if (BalanceCard + CreditLimit - downSumm <= 0)
             {
                 Console.WriteLine("Out of limit, you can't spend so much!");
             }
@@ -30,7 +28,7 @@ namespace BankProgramm
 
         public override string GetFullCardInfo()
         {
-            return base.GetFullCardInfo() + ", Credit limit: " + creditLimit;
+            return base.GetFullCardInfo() + ", Credit limit: " + CreditLimit;
         }
     }
 }

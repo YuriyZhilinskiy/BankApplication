@@ -8,19 +8,19 @@ namespace BankProgramm
 {
     internal class Bank
     {
-        public string BankName;
+        public string BankName { get; set; }
         public Card[] Cards;
-        public int NumberOfIssuedCards;
-        public int MaxNumberOfCards;
-        public double refundingRate;
-        public double bankInterest;
+        public int NumberOfIssuedCards { get; set; }
+        public int MaxNumberOfCards { get; set; }
+        public double RefundingRate { get; set; }
+        public double BankInterest { get; set; }
 
         public Bank(int cardsCount, double refundingRate)
         {
             MaxNumberOfCards = cardsCount;
             Cards = new Card[cardsCount];
             NumberOfIssuedCards = 0;
-            bankInterest = refundingRate + 3;
+            BankInterest = refundingRate + 3;
         }
         public void IssueCard (string name, double startBalance, int creditRating)
         {
