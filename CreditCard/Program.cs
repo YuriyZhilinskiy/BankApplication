@@ -9,7 +9,6 @@ int cardsCount = Convert.ToInt32(Console.ReadLine());
 
 Bank M7_Bank = new Bank(cardsCount, refundingRate);
 
-int i;
 
 Console.Write("Enter the number of issued cards: ");
 int newCardsCount = Convert.ToInt32(Console.ReadLine());
@@ -21,7 +20,7 @@ if (newCardsCount > M7_Bank.GetAvailableNumberOfCards())
 }
 else
 {
-    for (i = 0; i < newCardsCount; i++)
+    for (int i = 0; i < newCardsCount; i++)
     {
         Console.Write("Enter your Name: ");
         string name = Console.ReadLine();
@@ -36,6 +35,8 @@ else
         M7_Bank.IssueCard(name, startBalance, creditRating);
     }
 }
+
+M7_Bank.Cards[0].IdCard = 100;
 
 Console.WriteLine(M7_Bank.GetFullCardsInfo());
 

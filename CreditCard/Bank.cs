@@ -18,7 +18,7 @@ namespace BankProgramm
         public Bank(int cardsCount, double refundingRate)
         {
             MaxNumberOfCards = cardsCount;
-            Cards = new Card[cardsCount];
+            Cards = new DebetCard[cardsCount];
             NumberOfIssuedCards = 0;
             BankInterest = refundingRate + 3;
         }
@@ -26,7 +26,7 @@ namespace BankProgramm
         {
             if (creditRating <= 0)
             {
-                Cards[NumberOfIssuedCards] = new Card(name, NumberOfIssuedCards, startBalance);
+                Cards[NumberOfIssuedCards] = new DebetCard(name, NumberOfIssuedCards, startBalance);
                 NumberOfIssuedCards++;
             }
             else

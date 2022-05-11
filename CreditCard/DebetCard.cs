@@ -6,17 +6,16 @@ using System.Threading.Tasks;
 
 namespace BankProgramm
 {
-    internal class CreditCard : Card
+    internal class DebetCard : Card
     {
-        public double CreditLimit { get; set; }
-        public CreditCard(string name, int numCard, double balance, int raiting) : base(name, numCard, balance)
+        public DebetCard(string name, int numCard, double balance): base(name, numCard, balance)
         {
-            CreditLimit = balance * raiting * 1.10;
+           
         }
 
         public override void BalanceDown(double downSumm)
         {
-            if (BalanceCard + CreditLimit - downSumm <= 0)
+            if (BalanceCard - downSumm <= 0)
             {
                 Console.WriteLine("Out of limit, you can't spend so much!");
             }
@@ -25,15 +24,17 @@ namespace BankProgramm
                 BalanceCard -= downSumm;
             }
         }
-
         public override void BalanceUp(double upSumm)
         {
             BalanceCard += upSumm;
         }
-
+        public double GetBalance()
+        {
+            return BalanceCard;
+        }
         public override string GetFullCardInfo()
         {
-            return "\nID Card: " + IdCard + ", Name: " + NameCardHolder + "," + ", Credit limit: " + CreditLimit;
+            return "\nID Card: " + IdCard + ", Name: " + NameCardHolder + ", Balance: " + GetBalance();
         }
     }
 }
