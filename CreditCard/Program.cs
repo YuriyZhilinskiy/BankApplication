@@ -36,8 +36,6 @@ else
     }
 }
 
-M7_Bank.Cards[0].IdCard = 100;
-
 Console.WriteLine(M7_Bank.GetFullCardsInfo());
 
 Console.Write("\nDo you want transfer money? (1 - Yes, 0 - No) ");
@@ -60,4 +58,3 @@ else
 }
 
 Console.WriteLine(M7_Bank.GetFullCardsInfo());
-

@@ -34,7 +34,7 @@ namespace BankProgramm
         }
         public override string GetFullCardInfo()
         {
-            return "\nID Card: " + IdCard + ", Name: " + NameCardHolder + ", Balance: " + GetBalance();
+            return "\nID Card: " + IdCard + ", Type card: DC, Name: " + NameCardHolder + ", Balance: " + GetBalance();
         }
     }
 }

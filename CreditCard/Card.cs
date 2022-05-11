@@ -12,7 +12,7 @@ namespace BankProgramm
 
         public int IdCard { get; set; }
 
-        public double BalanceCard { get; protected set; }
+        public double BalanceCard { get; set; }
 
         public Card(string name, int numCard, double balance)
         {

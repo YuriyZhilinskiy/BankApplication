@@ -6,29 +6,30 @@ using System.Threading.Tasks;
 
 namespace BankProgramm
 {
-    internal class CreditCard : Card
-    {
-        public double CreditLimit { get; set; }
-        public CreditCard(string name, int numCard, double balance, int raiting) : base(name, numCard, balance)
+    internal class VirtualCard : Card
+    {  
+
+        public double TransferFee { get; set; }
+        public VirtualCard(string name, int numCard, double balance) : base(name, numCard, balance)
         {
-            CreditLimit = balance * raiting * 1.10;
+            TransferFee = 0.03;
         }
 
         public override void BalanceDown(double downSumm)
         {
-            if (BalanceCard + CreditLimit - downSumm <= 0)
+            if (BalanceCard - downSumm <= 0)
             {
                 Console.WriteLine("Out of limit, you can't spend so much!");
             }
             else
             {
-                BalanceCard -= downSumm;
+                BalanceCard -= downSumm - downSumm * TransferFee;
             }
         }
 
         public override void BalanceUp(double upSumm)
         {
-            BalanceCard += upSumm;
+            BalanceCard += upSumm - upSumm * TransferFee;
         }
 
         public double GetBalance()
@@ -37,7 +38,8 @@ namespace BankProgramm
         }
         public override string GetFullCardInfo()
         {
-            return "\nID Card: " + IdCard + ", Type card: CC, Name: " + NameCardHolder + ", Balance: " + GetBalance() + ", Credit limit: " + CreditLimit;
+            return "\nID Card: " + IdCard + ", Type card: VC, Name: " + NameCardHolder + ", Balance: " + GetBalance();
         }
     }
 }
+

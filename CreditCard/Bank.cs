@@ -18,13 +18,18 @@ namespace BankProgramm
         public Bank(int cardsCount, double refundingRate)
         {
             MaxNumberOfCards = cardsCount;
-            Cards = new DebetCard[cardsCount];
+            Cards = new Card[cardsCount];
             NumberOfIssuedCards = 0;
             BankInterest = refundingRate + 3;
         }
         public void IssueCard (string name, double startBalance, int creditRating)
         {
-            if (creditRating <= 0)
+            if (creditRating == 0)
+            {
+                Cards[NumberOfIssuedCards] = new VirtualCard(name, NumberOfIssuedCards, startBalance);
+                NumberOfIssuedCards++;
+            }
+            else if (creditRating < 0)
             {
                 Cards[NumberOfIssuedCards] = new DebetCard(name, NumberOfIssuedCards, startBalance);
                 NumberOfIssuedCards++;
