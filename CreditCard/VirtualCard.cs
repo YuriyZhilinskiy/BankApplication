@@ -10,9 +10,9 @@ namespace BankProgramm
     {  
 
         public double TransferFee { get; set; }
-        public VirtualCard(string name, int numCard, double balance) : base(name, numCard, balance)
+        public VirtualCard(string name, int numCard, double balance, double transferFee) : base(name, numCard, balance)
         {
-            TransferFee = 0.03;
+            TransferFee = transferFee;
         }
 
         public override void BalanceDown(double downSumm)
@@ -23,13 +23,13 @@ namespace BankProgramm
             }
             else
             {
-                BalanceCard -= downSumm - downSumm * TransferFee;
+                BalanceCard -= downSumm + downSumm * TransferFee / 100;
             }
         }
 
         public override void BalanceUp(double upSumm)
         {
-            BalanceCard += upSumm - upSumm * TransferFee;
+            BalanceCard += upSumm - upSumm * TransferFee / 100;
         }
 
         public double GetBalance()

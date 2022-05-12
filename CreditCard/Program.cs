@@ -1,18 +1,21 @@
 ﻿using System;
 using BankProgramm;
 
-Console.Write("Enter refunding rate: ");
+Console.Write("Enter refunding rate in %: ");
 double refundingRate = Convert.ToDouble(Console.ReadLine());
+
+Console.Write("Enter the bank transfer charge in %: ");
+double transferFee = Convert.ToDouble(Console.ReadLine());
 
 Console.Write("Enter the maximum number of cards: ");
 int cardsCount = Convert.ToInt32(Console.ReadLine());
 
-Bank M7_Bank = new Bank(cardsCount, refundingRate);
-
-
 Console.Write("Enter the number of issued cards: ");
 int newCardsCount = Convert.ToInt32(Console.ReadLine());
 Console.WriteLine();
+
+Bank M7_Bank = new Bank(cardsCount, refundingRate, transferFee);
+
 
 if (newCardsCount > M7_Bank.GetAvailableNumberOfCards())
 {
@@ -32,7 +35,7 @@ else
         int creditRating = Convert.ToInt32(Console.ReadLine());
         Console.WriteLine();
 
-        M7_Bank.IssueCard(name, startBalance, creditRating);
+        M7_Bank.IssueCard(name, startBalance, creditRating, transferFee);
     }
 }
 

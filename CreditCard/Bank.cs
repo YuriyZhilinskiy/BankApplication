@@ -8,25 +8,27 @@ namespace BankProgramm
 {
     internal class Bank
     {
+        public Card[] Cards; 
         public string BankName { get; set; }
-        public Card[] Cards;
         public int NumberOfIssuedCards { get; set; }
         public int MaxNumberOfCards { get; set; }
         public double RefundingRate { get; set; }
         public double BankInterest { get; set; }
+        public double TransferFee { get; set; }
 
-        public Bank(int cardsCount, double refundingRate)
+        public Bank(int cardsCount, double refundingRate, double transferFee)
         {
             MaxNumberOfCards = cardsCount;
             Cards = new Card[cardsCount];
             NumberOfIssuedCards = 0;
             BankInterest = refundingRate + 3;
+            TransferFee = transferFee;
         }
-        public void IssueCard (string name, double startBalance, int creditRating)
+        public void IssueCard (string name, double startBalance, int creditRating, double transferFee)
         {
             if (creditRating == 0)
             {
-                Cards[NumberOfIssuedCards] = new VirtualCard(name, NumberOfIssuedCards, startBalance);
+                Cards[NumberOfIssuedCards] = new VirtualCard(name, NumberOfIssuedCards, startBalance, transferFee);
                 NumberOfIssuedCards++;
             }
             else if (creditRating < 0)
