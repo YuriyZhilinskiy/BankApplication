@@ -14,16 +14,15 @@ namespace BankProgramm
             CreditLimit = balance * raiting * 1.10;
         }
 
-        public override void BalanceDown(double downSumm)
+        public override bool BalanceDown(double downSumm)
         {
             if (BalanceCard + CreditLimit - downSumm <= 0)
             {
-                Console.WriteLine("Out of limit, you can't spend so much!");
+               return false;
             }
-            else
-            {
-                BalanceCard -= downSumm;
-            }
+           
+            BalanceCard -= downSumm;
+            return true;
         }
 
         public override void BalanceUp(double upSumm)

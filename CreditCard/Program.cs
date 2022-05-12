@@ -14,15 +14,10 @@ Console.Write("Enter the number of issued cards: ");
 int newCardsCount = Convert.ToInt32(Console.ReadLine());
 Console.WriteLine();
 
-Bank M7_Bank = new Bank(cardsCount, refundingRate, transferFee);
+Bank M7_Bank = new Bank(refundingRate, transferFee);
 
 
-if (newCardsCount > M7_Bank.GetAvailableNumberOfCards())
-{
-    Console.WriteLine("Out of number of cards limit!");
-}
-else
-{
+
     for (int i = 0; i < newCardsCount; i++)
     {
         Console.Write("Enter your Name: ");
@@ -37,7 +32,7 @@ else
 
         M7_Bank.IssueCard(name, startBalance, creditRating, transferFee);
     }
-}
+
 
 Console.WriteLine(M7_Bank.GetFullCardsInfo());
 

@@ -15,16 +15,14 @@ namespace BankProgramm
             TransferFee = transferFee;
         }
 
-        public override void BalanceDown(double downSumm)
+        public override bool BalanceDown(double downSumm)
         {
             if (BalanceCard - downSumm <= 0)
             {
-                Console.WriteLine("Out of limit, you can't spend so much!");
+               return false;
             }
-            else
-            {
-                BalanceCard -= downSumm + downSumm * TransferFee / 100;
-            }
+            BalanceCard -= downSumm + downSumm * TransferFee / 100;
+            return true;
         }
 
         public override void BalanceUp(double upSumm)

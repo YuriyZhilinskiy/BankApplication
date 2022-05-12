@@ -8,19 +8,15 @@ namespace BankProgramm
 {
     internal class Bank
     {
-        public Card[] Cards; 
+        private List<Card> Cards; 
         public string BankName { get; set; }
-        public int NumberOfIssuedCards { get; set; }
-        public int MaxNumberOfCards { get; set; }
-        public double RefundingRate { get; set; }
+         public double RefundingRate { get; set; }
         public double BankInterest { get; set; }
         public double TransferFee { get; set; }
 
-        public Bank(int cardsCount, double refundingRate, double transferFee)
+        public Bank(double refundingRate, double transferFee)
         {
-            MaxNumberOfCards = cardsCount;
-            Cards = new Card[cardsCount];
-            NumberOfIssuedCards = 0;
+            Cards = new List<Card>();
             BankInterest = refundingRate + 3;
             TransferFee = transferFee;
         }
@@ -28,30 +24,24 @@ namespace BankProgramm
         {
             if (creditRating == 0)
             {
-                Cards[NumberOfIssuedCards] = new VirtualCard(name, NumberOfIssuedCards, startBalance, transferFee);
-                NumberOfIssuedCards++;
+                Cards.Add(new VirtualCard(name, Cards.Count(), startBalance, transferFee));
             }
             else if (creditRating < 0)
             {
-                Cards[NumberOfIssuedCards] = new DebetCard(name, NumberOfIssuedCards, startBalance);
-                NumberOfIssuedCards++;
+                Cards.Add(new DebetCard(name, Cards.Count(), startBalance));
             }
             else
             {
-                Cards[NumberOfIssuedCards] = new CreditCard(name, NumberOfIssuedCards, startBalance, creditRating);
-                NumberOfIssuedCards++;
+                Cards.Add(new CreditCard(name, Cards.Count(), startBalance, creditRating));
             }
         }
-        public int GetAvailableNumberOfCards()
-        {
-            return MaxNumberOfCards - NumberOfIssuedCards;
-        }
+      
         public string GetFullCardsInfo()
         {
             string fullCardsInfo = "";
-            for (int i= 0; i < NumberOfIssuedCards; i++)
+            foreach (Card card in Cards)
             {
-                fullCardsInfo += Cards[i].GetFullCardInfo();
+                fullCardsInfo += card.GetFullCardInfo();
                 fullCardsInfo += " ";
             }
             return fullCardsInfo;
@@ -61,15 +51,15 @@ namespace BankProgramm
         {
             Card sourceCard = null, targetCard = null;
 
-            for (int index = 0; index < NumberOfIssuedCards; index++)
+            foreach (Card card in Cards)
             {
-                if (Cards[index].IdCard == sourceCardNumber)
+                if (card.IdCard == sourceCardNumber)
                 {
-                    sourceCard = Cards[index];
+                    sourceCard = card;
                 }
-                else if (Cards[index].IdCard == targetCardNumber)
+                else if (card.IdCard == targetCardNumber)
                 {
-                    targetCard = Cards[index];
+                    targetCard = card;
                 }
             }
 
@@ -78,11 +68,13 @@ namespace BankProgramm
                 return false;
             }
 
-            sourceCard.BalanceDown(sum);
-            targetCard.BalanceUp(sum);
+            if (sourceCard.BalanceDown(sum) == true)
+            {
+                targetCard.BalanceUp(sum);
+                return true;
+            }
 
-            return true;
-
+            return false;
         }
     }
 }
